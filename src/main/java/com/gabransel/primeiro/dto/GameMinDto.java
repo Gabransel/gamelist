@@ -2,6 +2,7 @@ package com.gabransel.primeiro.dto;
 
 
 import com.gabransel.primeiro.entities.Game;
+import com.gabransel.primeiro.projections.GameMinProjection;
 
 public class GameMinDto {
 
@@ -20,6 +21,14 @@ public class GameMinDto {
         this.score = entity.getScore();
         this.imgUrl = entity.getImgUrl();
         this.shortDescription = entity.getShortDescription();
+    }
+
+    public GameMinDto(GameMinProjection projection){
+        this.id = projection.getId();
+        this.title = projection.getTitle();
+        this.score = projection.getScore();
+        this.imgUrl = projection.getImgUrl();
+        this.shortDescription = projection.getShortDescription();
     }
 
     public Long getId() {

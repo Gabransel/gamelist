@@ -3,6 +3,7 @@ package com.gabransel.primeiro.services;
 import com.gabransel.primeiro.dto.GameDto;
 import com.gabransel.primeiro.dto.GameMinDto;
 import com.gabransel.primeiro.entities.Game;
+import com.gabransel.primeiro.projections.GameMinProjection;
 import com.gabransel.primeiro.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -28,5 +29,12 @@ public class GameService {
         var result = gameRepository.findAll();
         List<GameMinDto> dto = result.stream().map(x -> new GameMinDto(x)).toList();
         return dto;
+    }
+
+    @Transactional(readOnly = true)
+    public List<GameMinDto> findByList(Long listId){
+        List<GameMinProjection> result = gameRepository.searchByList(listId);
+        return result.stream().map(x -> new GameMinDto(x)).toList();
+
     }
 }
