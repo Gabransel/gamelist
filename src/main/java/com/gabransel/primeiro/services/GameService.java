@@ -4,6 +4,7 @@ import com.gabransel.primeiro.dto.GameDto;
 import com.gabransel.primeiro.dto.GameMinDto;
 import com.gabransel.primeiro.entities.Game;
 import com.gabransel.primeiro.projections.GameMinProjection;
+import com.gabransel.primeiro.repositories.GameListRepository;
 import com.gabransel.primeiro.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,9 @@ public class GameService {
 
     @Autowired
     private GameRepository gameRepository;
+
+    @Autowired
+    private GameListRepository gameListRepository;
 
     @Transactional(readOnly = true)
     public GameDto findById(Long gameId){
@@ -37,4 +41,6 @@ public class GameService {
         return result.stream().map(x -> new GameMinDto(x)).toList();
 
     }
+
+
 }
